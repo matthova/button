@@ -1,14 +1,26 @@
+from time import sleep
 import RPi.GPIO as GPIO
+import requests
+
+input_pin = 23
+
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+GPIO.setup(23, GPIO.IN)
 
-def printFunction(channel):
-  print("Button 1 pressed!")
-  print("Note how the bouncetime affects the button press")
-  
-GPIO.add_event_detect(23, GPIO.RISING, callback=printFunction, bouncetime=300)
+def handle_push():
+  r = requests.post('http://127.0.0.1:1337')
 
-while True:
-  pass
-
-GPIO.cleanup()
+last_input = None
+try:
+  while True:
+    input = GPIO.input(input_pin)
+    if input != last_input:
+      if input:
+        print "Button is released"
+      else:
+        print "Button is pushed"
+        handle_push()
+    last_input = input
+    sleep(0.05)
+except:
+  GPIO.cleanup()
