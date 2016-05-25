@@ -3,13 +3,14 @@ import time
 
 try:
     inputPin = 23
-    GPIO.setmode(GPIO.BOARD)     # Use board pin numbering
+    GPIO.setmode(GPIO.BCM)     # Use bcm numbering
     GPIO.setup(inputPin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
     prev_input = 0
     while True:
       #take a reading
       input = GPIO.input(inputPin)
+      print input
       #if the last reading was low and this one high, print
       if ((not prev_input) and input):
         print("Button pressed")

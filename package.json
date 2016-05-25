@@ -1,0 +1,22 @@
+{
+  "name": "button",
+  "version": "1.0.0",
+  "description": "Follow GPIO resources [here](http://makezine.com/projects/tutorial-raspberry-pi-gpio-pins-and-python/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matthova/button.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matthova/button/issues"
+  },
+  "homepage": "https://github.com/matthova/button#readme",
+  "dependencies": {
+    "rpi-gpio": "^0.7.0"
+  }
+}
