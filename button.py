@@ -1,22 +1,16 @@
-import RPi.GPIO as GPIO # Import GPIO library
-import time
+import RPi.GPIO as GPIO
+import requests
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
 
-try:
-    inputPin = 23
-    GPIO.setmode(GPIO.BCM)     # Use bcm numbering
-    GPIO.setup(inputPin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+def printFunction(channel):
+  print("Button 1 pressed!")
+  print("Note how the bouncetime affects the button press")
+  r = requests.post('http://127.0.0.1:1337')
+  
+GPIO.add_event_detect(23, GPIO.RISING, callback=printFunction, bouncetime=300)
 
-    prev_input = 0
-    while True:
-      #take a reading
-      input = GPIO.input(inputPin)
-      print input
-      #if the last reading was low and this one high, print
-      if ((not prev_input) and input):
-        print("Button pressed")
-      #update previous input
-      prev_input = input
-      #slight pause to debounce
-      time.sleep(0.05)
-except KeyboardInterrupt:
-    GPIO.cleanup()               # Clean up the hardware drivers
+while True:
+  pass
+
+GPIO.cleanup()
