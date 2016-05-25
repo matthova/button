@@ -4,8 +4,8 @@ import time
 try:
     inputPin = 23
     GPIO.setmode(GPIO.BOARD)     # Use board pin numbering
-    GPIO.setup(inputPin, GPIO.OUT) # Setup GPIO Pin 7 to OUT	
-    
+    GPIO.setup(inputPin, GPIO.IN, pull_up_down = GPIO.PUD_DOWN)
+
     prev_input = 0
     while True:
       #take a reading
